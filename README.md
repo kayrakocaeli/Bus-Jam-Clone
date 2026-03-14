@@ -1,81 +1,83 @@
-Bus Jam - High Performance Puzzle Mechanics Template
-A robust, production-ready puzzle game template for Unity, focused on high-performance rendering, clean C# architecture (SOLID), and professional game feel.
+# 🚌 Bus Jam - High Performance Mechanics Template
 
-🚀 Technical Highlights
-High-End Performance: Optimized to run at 500+ FPS on desktop with approximately 50 Draw Calls (Batches) using Material Property Blocks to prevent breaking batching while allowing unique per-object properties.
+<p align="center">
+  <img src="https://img.shields.io/badge/Unity-2022.3%2B-blue?style=for-the-badge&logo=unity" alt="Unity Version">
 
-Clean Architecture (SOLID): Strict adherence to the Single Responsibility Principle (SRP). Game logic is decoupled into specialized managers (GridManager, BusManager, SoundManager, InteractionManager).
+  <img src="https://img.shields.io/badge/C%23-SOLID-green?style=for-the-badge&logo=csharp" alt="C# SOLID">
+  <img src="https://img.shields.io/badge/Render%20Pipeline-Built--in%20RP-red?style=for-the-badge" alt="Built-in RP">
+</p>
 
-SDF-Based Shader Grid: A custom-written shader handles the background grid, using Signed Distance Fields (SDF) for dynamic rounded corners, procedural borders, and masking, all while managing tile data via global arrays.
+---
 
-Advanced Sound System: A ScriptableObject-based sound architecture supporting Crossfading Music, randomized pitching for SFX, and delayed execution via DOTween integration.
+## 🌟 Overview
 
-Modular Level Data: Levels are entirely data-driven using ScriptableObjects, allowing for easy level creation without touching the scene hierarchy.
+This project was developed as a **Technical Case Study** to demonstrate a production-ready puzzle game core in Unity. It is engineered for maximum performance and architectural scalability, solving common industry challenges like draw-call optimization, modular data management, and decoupled system communication.
 
-🛠 Tech Stack
-Unity 2022.3+ (Built-in Render Pipeline / URP Compatible)
+---
 
-C# Scripting: Advanced event-driven logic and Singleton-based service registration.
+## 🚀 Key Technical Pillars
 
-DOTween (Demigiant): Orchestrates all procedural animations, UI transitions, and movement sequences.
+### ⚡ 1. High-Performance Rendering (Built-in Optimized)
+* **Batching Preservation:** Uses `MaterialPropertyBlock` to pass per-object data (colors, outlines) to the GPU. This prevents breaking **Static/Dynamic Batching**, which is crucial for Built-in RP performance.
+* **SDF Grid Shader:** A custom HLSL shader written specifically for Built-in RP, using **Signed Distance Fields (SDF)** for procedural borders and dynamic masking.
+* **Efficient Memory:** Zero-allocation runtime for passengers and buses via a pre-warmed `PoolManager`.
 
-ShaderLab / HLSL: Custom environment shader for optimized grid rendering.
+### 🏗️ 2. Clean Architecture (SOLID Case Study)
+* **Service Locator Pattern:** Decoupled manager communication via a central `GameContext`.
+* **Data-Driven Design:** Level configurations are stored in `ScriptableObjects`, making the logic entirely independent of scene hierarchy.
+* **SRP Adherence:** * `BusManager`: Handles mathematical queuing and 3D movement logic.
+    * `InteractionManager`: Manages input processing and path validation.
+    * `GridManager`: Manages spatial mapping and shader property updates.
 
-ScriptableObjects: Used for Level Data, Color Catalogs, and Sound Databases.
+### 🎵 3. Advanced Audio Engine
+* **Crossfade Engine:** Smooth volume transitions between Menu and Gameplay music using DOTween.
+* **Dynamic Pitching:** Randomized SFX pitching to prevent repetitive audio fatigue.
+* **Delayed Execution:** Integrated `PlaySFXDelayed` for perfect synchronization with DOTween animations.
 
-🎮 Getting Started
-Play the Game
-The Official Flow: Open the MenuScene and press Play. This ensures all persistent managers (like SoundManager) are initialized correctly.
+---
 
-Developer Quick-Start: You can also start directly from the GameScene. The GameManager is designed to handle local testing by loading the testLevelOverride if assigned in the Inspector.
+## 🛠️ Technology Stack
 
-🛠 Level Editor Guide (Detailed)
-The project includes a custom-built Level Editor to streamline content creation.
+| Technology | Usage |
+| :--- | :--- |
+| **Built-in Render Pipeline** | High-compatibility, low-overhead rendering engine. |
+| **DOTween (Demigiant)** | Procedural animations, UI transitions, and movement sequences. |
+| **ShaderLab / HLSL** | Custom SDF grid and environment shaders. |
+| **ScriptableObjects** | Level Data, Color Catalogs, and Sound Databases. |
+| **Singleton / Context** | Centralized manager initialization and service registration. |
 
-1. Opening the Editor
-Open the LevelEditor scene found in Assets/Scenes/Editor/.
+---
 
-2. Editor Setup
-Locate the LevelEditorContext object in the Hierarchy.
+## 📖 Level Editor Guide (Case Feature)
 
-In the Inspector, you can either:
+<details>
+<summary><b>Click to expand: How to create new levels in seconds</b></summary>
 
-Load Existing: Drag an existing LevelDataSO from Assets/Resources/Levels/ into the "Level Data" slot.
+### 1️⃣ Initialization
+1. Open `Assets/Scenes/Editor/LevelEditor.unity`.
+2. Select the `LevelEditorContext` in the Hierarchy.
+3. Click **"Create New Level SO"** to generate a fresh data file.
 
-Create New: Set the desired Width/Height and click "Create New Level SO".
+### 2️⃣ Painting the Grid
+Select a brush from the Inspector grid:
+* **Passenger Brushes:** Click to place color codes.
+* **Obstacle Brush:** Block paths for strategic design.
+* **Eraser:** Quickly remove objects or entire tiles.
 
-3. Using the Brushes (Painting)
-The editor uses a "Brush System" to paint the grid in the Scene View:
+### 3️⃣ Logistics & Validation
+* **Bus Sequence:** Define the arrival order of buses in the Inspector list.
+* **Auto-Validator:** The editor provides real-time feedback if:
+    * Passenger counts aren't multiples of 3.
+    * The bus sequence doesn't match the required passenger capacity.
 
-Passenger Brushes: Select a color (Red, Blue, Green, etc.) and click on any tile to place a passenger.
+### 4️⃣ Publishing
+Click **"PUBLISH / SAVE LEVEL"**. Your level is saved to `Resources/Levels` and is ready for the `GameManager` to load.
+</details>
 
-Obstacle Brush: Marks a tile as a wall/blocker.
+---
 
-Empty Floor: Reverts a tile to a standard playable floor.
+## 🎮 Getting Started
 
-Eraser Brushes: Removes objects or deletes tiles from the active grid layout.
-
-4. Configuring Level Mechanics
-Grid Size: Adjust Width and Height in real-time. The grid will automatically resize and maintain existing data where possible.
-
-Bus Spawn Sequence: This is the most critical part. Define the order in which buses arrive (e.g., Purple -> Blue -> Red).
-
-Level Timer: Set the total duration allowed for the level in seconds.
-
-5. Validation & Publishing
-The Editor includes an Auto-Validation System:
-
-Rule of 3: The system checks if the number of passengers for each color is a multiple of 3.
-
-Bus Match: It ensures the Bus Spawn Sequence contains enough capacity for all placed passengers.
-
-Publish: Once the "Level Valid" info box appears, click "PUBLISH / SAVE LEVEL". This will save the ScriptableObject and rename it according to your "Level Name" input.
-
-🏗 System Architecture
-GameContext: A central service locator for decoupled communication between managers.
-
-BusManager: Handles the mathematical queueing of buses and the 3D movement logic for the bus sequence.
-
-InteractionManager: Manages raycasting, input validation, and movement path execution.
-
-SoundManager: Controls the global audio state with professional Crossfade transitions between Menu and Gameplay.
+### Play the Game
+1.  **Menu Flow:** Start from `MenuScene` for full persistent manager initialization.
+2.  **Dev Flow:** Start from `GameScene` and assign a `testLevelOverride` in the `GameManager` Inspector for rapid testing.
