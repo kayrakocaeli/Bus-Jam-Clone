@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1a55e56968ed0546ad5444847695e11, type: 3}
+  m_Name: ColorCatalog
+  m_EditorClassIdentifier: 
+  catalog:
+  - color: 1
+    passengerMaterial: {fileID: 2100000, guid: 5a97865cbc34908498d4ea7c5345d30e, type: 2}
+    busMaterial: {fileID: 2100000, guid: 3e9ef5033d85eff4288253608be9ed9b, type: 2}
+  - color: 2
+    passengerMaterial: {fileID: 2100000, guid: 87ab134d1cacf7f4fb70e12beadd2804, type: 2}
+    busMaterial: {fileID: 2100000, guid: db0008ea1607776408f694b3bd495241, type: 2}
+  - color: 3
+    passengerMaterial: {fileID: 2100000, guid: 4241c33a448f5094fa8f91dabd21f4a1, type: 2}
+    busMaterial: {fileID: 2100000, guid: 491343b26c3ce5543b5f0a7db4b4961e, type: 2}
+  - color: 4
+    passengerMaterial: {fileID: 2100000, guid: 1d30a9f8f7fdbaa4180f2e22604352e1, type: 2}
+    busMaterial: {fileID: 2100000, guid: dfe0a9bffa09b874eb15e03c307a2947, type: 2}
+  - color: 5
+    passengerMaterial: {fileID: 2100000, guid: 3de253b97a9c7874490c9724077c9b03, type: 2}
+    busMaterial: {fileID: 2100000, guid: 9c16e0cd6d7d8a849967b0cc04150873, type: 2}
+  - color: 6
+    passengerMaterial: {fileID: 2100000, guid: 7e36e498e5246ae418be1076f13447fe, type: 2}
+    busMaterial: {fileID: 2100000, guid: 99ed2a8d35970ac459c1822a3cc43312, type: 2}
